@@ -1,9 +1,9 @@
 let map;
 let marker;
-let mode = 'residencia'; // Modo predeterminado, actualizar la residencia, es decir, las primeras coordenadas en agregar por defecto son las de la residencia
+let currentMode = 'residencia'; // Define si estamos actualizando la dirección de residencia o de trabajo
 
 function initMap() {
-    const initialPosition = { lat: 4.60971, lng: -74.08175 }; // Coordenadas de Bogotá, Colombia
+    const initialPosition = { lat: 4.60971, lng: -74.08175 }; // Bogotá, Colombia
 
     map = new google.maps.Map(document.getElementById("map"), {
         center: initialPosition,
@@ -12,10 +12,10 @@ function initMap() {
 
     map.addListener("click", (event) => {
         placeMarker(event.latLng);
-        if (mode === 'residencia') {
+        if (currentMode === 'residencia') {
             document.getElementById("latitud").value = event.latLng.lat().toFixed(8);
             document.getElementById("longitud").value = event.latLng.lng().toFixed(8);
-        } else if (mode === 'trabajo') {
+        } else if (currentMode === 'trabajo') {
             document.getElementById("latitud_trabajo").value = event.latLng.lat().toFixed(8);
             document.getElementById("longitud_trabajo").value = event.latLng.lng().toFixed(8);
         }
@@ -32,25 +32,12 @@ function placeMarker(location) {
     });
 }
 
-// Función para alternar entre modo residencia y trabajo
-function switchMode(newMode) {
-    mode = newMode;
-    // Actualizamos los campos visualmente para mostrar qué coordenadas se están actualizando
-    if (newMode === 'residencia') {
-        document.getElementById("direccion").focus();
-    } else if (newMode === 'trabajo') {
-        document.getElementById("direccion_trabajo").focus();
-    }
-}
-
-// Cambiar el modo a 'residencia'
 function setResidenciaMode() {
-    switchMode('residencia');
+    currentMode = 'residencia';
 }
 
-// Cambiar el modo a 'trabajo'
 function setTrabajoMode() {
-    switchMode('trabajo');
+    currentMode = 'trabajo';
 }
 
 function guardarUsuario() {
@@ -87,7 +74,7 @@ function guardarUsuario() {
     .then(response => response.json())
     .then(data => {
         console.log(data.mensaje);
-        alert(data.mensaje);
+        alert("Usuario guardado correctamente");
     })
     .catch(error => {
         console.error("Error:", error);
