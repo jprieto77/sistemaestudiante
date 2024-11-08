@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- API de Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdadQa9M5BS_jkerlfNvZUZVAwrDZr6dw"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Registro</h1>
+        <form id="estudianteForm">
+            <label for="cedula">Número de Documento</label>
+            <input type="text" id="cedula" placeholder="Ingrese su número de documento" required>
+            
+            <label for="nombres">Nombres</label>
+            <input type="text" id="nombres" placeholder="Ingrese sus nombres" required>
+            
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" required>
+            
+            <label for="direccion">Dirección Residencia</label>
+            <input type="text" id="direccion" placeholder="Ingrese su dirección de residencia" required>
+            
+            <div class="coord-container">
+                <div>
+                    <label for="latitud">Latitud Residencia</label>
+                    <input type="text" id="latitud" placeholder="Latitud" readonly>
+                </div>
+                <div>
+                    <label for="longitud">Longitud Residencia</label>
+                    <input type="text" id="longitud" placeholder="Longitud" readonly>
+                </div>
+            </div>
+
+            <button type="button" onclick="setResidenciaMode()">Actualizar Dirección Residencia</button>
+            <button type="button" onclick="setTrabajoMode()">Actualizar Dirección Trabajo</button>
+
+            <label for="direccion_trabajo">Dirección Trabajo</label>
+            <input type="text" id="direccion_trabajo" placeholder="Ingrese su dirección de trabajo" required>
+            
+            <div class="coord-container">
+                <div>
+                    <label for="latitud_trabajo">Latitud Trabajo</label>
+                    <input type="text" id="latitud_trabajo" placeholder="Latitud" readonly>
+                </div>
+                <div>
+                    <label for="longitud_trabajo">Longitud Trabajo</label>
+                    <input type="text" id="longitud_trabajo" placeholder="Longitud" readonly>
+                </div>
+            </div>
+
+            <button type="button" onclick="guardarUsuario()">Guardar Usuario</button>
+        </form>
+        
+        <div id="map"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
